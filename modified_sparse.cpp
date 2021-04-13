@@ -28,6 +28,12 @@ public:
 			}
 		}
 	}
+	const T& operator[](uint32_t x)const{
+		return content[x];
+	}
+	const T& at(uint32_t x)const{
+		return content.at(x);
+	}
 	T query(uint32_t l, uint32_t r){
 		assert(l<r);
 		r--;
