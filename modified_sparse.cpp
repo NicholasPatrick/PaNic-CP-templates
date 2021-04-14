@@ -34,7 +34,7 @@ public:
 	const T& at(uint32_t x)const{
 		return content.at(x);
 	}
-	T query(uint32_t l, uint32_t r){
+	T query(uint32_t l, uint32_t r)const{
 		assert(l<r);
 		r--;
 		if(l==r)
