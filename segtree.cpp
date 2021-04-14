@@ -26,7 +26,7 @@ public:
 			content[x]=content[x<<1|1]+content[x+1<<1];
 		}while(x);
 	}
-	T query(uint32_t l, uint32_t r){
+	T query(uint32_t l, uint32_t r)const{
 		T retl, retr;
 		for(l+=n-1, r+=n-1; l<r; l=l-1>>1, r=r-1>>1){
 			if(~l&1)
