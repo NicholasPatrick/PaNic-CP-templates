@@ -12,7 +12,8 @@ class disjoint_sparse{
 public:
 	disjoint_sparse(std::vector<T> a):n(a.size()){
 		content=std::move(a);
-		if(n<=1)return;
+		if(n<=1)
+			return;
 		uint32_t levels=fastlog(n-1)+1;
 		content.resize(n*levels, content[0]);
 		for(uint32_t i=n, j=2; i < content.size(); i+=n, j<<=1){
