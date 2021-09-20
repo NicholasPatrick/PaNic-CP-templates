@@ -1,12 +1,12 @@
-#include <cstdio>
+#include <cstdint>
 #include <queue>
 
-const int maxn=1e5;
-std::vector<int> adjLis[maxn];
-int par[maxn], jump[maxn], depth[maxn];
-void dfs1(int x){
-	int j=jump[x];
-	for(int y : adjLis[x]){
+const uint32_t maxn=1e5;
+std::vector<uint32_t> adjLis[maxn];
+uint32_t par[maxn], jump[maxn], depth[maxn];
+void dfs1(uint32_t x){
+	uint32_t j=jump[x];
+	for(uint32_t y : adjLis[x]){
 		if(y==par[x])
 			continue;
 		jump[y]=depth[jump[j]]+depth[x]==depth[j]<<1?jump[j]:x;
@@ -15,7 +15,7 @@ void dfs1(int x){
 		dfs1(y);
 	}
 }
-int lca(int x, int y){
+uint32_t lca(uint32_t x, uint32_t y){
 	if(depth[x]<depth[y])
 		std::swap(x, y);
 	while(depth[x]>depth[y]){
@@ -37,8 +37,8 @@ int lca(int x, int y){
 	}
 	return par[x];
 }
-int lca(int x, int y, int z){
-	int a=lca(x, y), b=lca(y, z), c=lca(x, z);
+uint32_t lca(uint32_t x, uint32_t y, uint32_t z){
+	uint32_t a=lca(x, y), b=lca(y, z), c=lca(x, z);
 	if(depth[a]>=depth[b]){
 		if(depth[a]>=depth[c])
 			return a;
@@ -48,7 +48,7 @@ int lca(int x, int y, int z){
 		return b;
 	return c;
 }
-int la(int x, int y){
+uint32_t la(uint32_t x, uint32_t y){
 	while(y){
 		if(depth[jump[x]]-depth[x]<=y){
 			y-=depth[jump[x]]-depth[x];
@@ -59,4 +59,10 @@ int la(int x, int y){
 		}
 	}
 	return x;
+}
+uint32_t la(uint32_t x, uint32_t y, uint32_t r){
+	uint32_t l=lca(x, r);
+	if(depth[x]-depth[l]<=y)
+		return la(x, y);
+	return la(r, y-depth[x]+depth[l]);
 }
