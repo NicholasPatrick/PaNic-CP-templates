@@ -1,6 +1,8 @@
+//disjoint_sparse.cpp
 #include <queue>
 #include <cstdint>
 #include <cassert>
+#include <numeric>
 
 template<typename T>
 class disjoint_sparse{
@@ -16,16 +18,19 @@ public:
 			return;
 		uint32_t levels=fastlog(n-1)+1;
 		content.resize(n*levels, content[0]);
+		// for(uint32_t i=n, j=2; i < content.size(); i+=n, j<<=1){
+		// 	for(uint32_t k=0; k<n; k+=j){
+				
+		// 	}
+		// }
 		for(uint32_t i=n, j=2; i < content.size(); i+=n, j<<=1){
-			for(uint32_t k = j; k < n; k += j){
-				content[i+k]=content[k];
-				for(k ++; k&j and k<n; k ++)
-					content[i+k]=content[i+k-1]+content[k];
+			for(uint32_t k=j; k<n; k+=j<<1){
+				std::partial_sum(content.begin()+k,
+					content.begin()+std::min(k+j, n), content.begin()+i+k);
 			}
-			for(uint32_t k = j-1; k < n; k += j*3){
-				content[i+k]=content[k];
-				for(k --; ~k&j; k --)
-					content[i+k]=content[k]+content[i+k+1];
+			for(uint32_t k=j-1; k<n; k+=j<<1){
+				std::partial_sum(content.rend()+k, content.rend()+k-j,
+					content.rend()+i+k);
 			}
 		}
 	}
