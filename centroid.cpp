@@ -32,6 +32,7 @@ void centdecomp(int x=0){
 	for(int y : adjLis[x]){
 		if(mark[y])
 			continue;
+		//centroid parent of y is x
 		centdecomp(y);
 	}
 }
