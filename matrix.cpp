@@ -1,58 +1,69 @@
 #include <cstdio>
 #include <queue>
-#include <cstdarg>
 #include <cassert>
+#include <cstdint>
 
-template<typename T>
+template <typename T>
 class matrix{
-	std::vector<std::vector<T>> a;
+	uint32_t n, m;
+	std::vector<T> content;
 public:
-	matrix(){}
-	matrix(int n, int m):a(n, std::vector<T>(m)){}
-	matrix(int n, int m, T v):a(n, std::vector<T>(m, v)){}
-	size_t n()const{
-		return a.size();
-	}
-	size_t m()const{
-		return a.empty()?0:a[0].size();
-	}
-	std::vector<T>& operator[](int index){
-		return a[index];
-	}
-	std::vector<T>& at(int index){
-		return a.at(index);
-	}
-	T& at(int x, int y){
-		return a.at(x).at(y);
+	matrix():n(0), m(0){}
+	matrix(uint32_t n, uint32_t m):n(n), m(m), content(n*m){}
+	uint32_t r()const{return n;}
+	uint32_t c()const{return m;}
+	T& at(uint32_t x, uint32_t y){
+		return content[x*m+y];
+		// return content.at(x*m+y);
 	}
 	matrix operator+(matrix rhs)const{
-		assert(n()==rhs.n() and m()==rhs.m());
-		for(int i=0; i<n(); i++)for(int j=0; j<m(); j++)
-			rhs[i][j]=a[i][j]+rhs[i][j];
+		assert(n==rhs.n and m==rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++)
+			rhs.at(i, j)=at(i, j)+rhs.at(i, j);
 		return rhs;
 	}
 	matrix operator-(matrix rhs)const{
-		assert(n()==rhs.n() and m()==rhs.m());
-		for(int i=0; i<n(); i++)for(int j=0; j<m(); j++)
-			rhs[i][j]=a[i][j]-rhs[i][j];
+		assert(n==rhs.n and m==rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++)
+			rhs.at(i, j)=at(i, j)-rhs.at(i, j);
 		return rhs;
 	}
 	matrix dot(matrix rhs)const{
-		assert(n()==rhs.n() and m()==rhs.m());
-		for(int i=0; i<n(); i++)for(int j=0; j<m(); j++)
-			rhs[i][j]=a[i][j]*rhs[i][j];
+		assert(n==rhs.n and m==rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++)
+			rhs.at(i, j)=at(i, j)*rhs.at(i, j);
 		return rhs;
 	}
 	matrix operator*(const matrix& rhs)const{
-		/*
-			Additional identity must exist
-		*/
-		assert(m()==rhs.n());
-		matrix ret(n(), rhs.m());
-		for(int i=0; i<n(); i++)for(int j=0; j<m(); j++){
-			for(int k=0; k<rhs.m(); k++)
-				ret[i][k]=ret[i][k]+a[i][j]*rhs.a[j][k];
+		assert(m==rhs.n);
+		matrix ret(n, rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++){
+			for(uint32_t k=0; k<rhs.m; k++)
+				ret.at(i, k)=ret.at(i, k)+content[i*m+j]*rhs.content.at(j*rhs.m+k);
 		}
 		return ret;
 	}
+	matrix& operator+=(const matrix& rhs){
+		assert(n==rhs.n and m==rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++)
+			at(i, j)=at(i, j)+rhs.at(i, j);
+		return *this;
+	}
+	matrix& operator-=(const matrix& rhs){
+		assert(n==rhs.n and m==rhs.m);
+		for(uint32_t i=0; i<n; i++)for(uint32_t j=0; j<m; j++)
+			at(i, j)=at(i, j)-rhs.at(i, j);
+		return *this;
+	}
+	matrix& operator*=(const matrix& rhs){
+		return *this=operator*(rhs);
+	}
+};
+template<int32_t mod>
+struct mint{
+	int32_t a;
+	mint(int32_t a=0):a(a){}
+	mint operator+(mint rhs)const{int32_t d=a+rhs.a;return d<mod?d:d-mod;}
+	mint operator-(mint rhs)const{int32_t d=a-rhs.a;return d<0?d+mod:d;}
+	mint operator*(mint rhs)const{return (int64_t)a*rhs.a%mod;}
 };
