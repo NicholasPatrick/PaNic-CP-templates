@@ -1,7 +1,7 @@
-#include <cstdio>
-#include <queue>
 #include <cassert>
 #include <cstdint>
+#include <cstdio>
+#include <queue>
 #include <type_traits>
 
 template <typename T>
@@ -83,7 +83,8 @@ public:
 					for (uint32_t j = ini; j < n * n; j += m) {
 						if (pc::operator[](j) != 0) {
 							std::swap_ranges(pc::operator[].begin() + j,
-								pc::operator[].begin() + j + n - i, pc::operator[].begin() + ini);
+								pc::operator[].begin() + j + n - i,
+								pc::operator[].begin() + ini);
 							break;
 						}
 					}
@@ -100,38 +101,5 @@ public:
 				pc::operator[](ini) = 1;
 			}
 		}
-	}
-};
-template <int32_t mod>
-struct mint {
-	int32_t v;
-	mint(int32_t v = 0) : v(v) {}
-	mint operator+(mint rhs) const {
-		int32_t d = v + rhs.v;
-		return d < mod ? d : d - mod;
-	}
-	mint operator-(mint rhs) const {
-		int32_t d = v - rhs.v;
-		return d < 0 ? d + mod : d;
-	}
-	mint operator*(mint rhs) const {
-		return (int64_t)v * rhs.v % mod;
-	}
-	mint inv() const {
-		int32_t a = 1, b = 0, c = v, d = mod;
-		while (c != 1) {
-			int32_t e = d / c;
-			d -= c * e;
-			b -= a * e;
-			e = a; a = b; b = e;
-			e = c; c = d; d = e;
-		}
-		return a < 0 ? a + mod : a;
-	}
-	mint operator/(mint rhs) const {
-		return operator*(rhs.inv());
-	}
-	mint abs() const {
-		return *this;
 	}
 };
