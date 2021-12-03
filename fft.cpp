@@ -27,9 +27,9 @@ std::vector<cd> fft(std::vector<cd> p) {
 			powers[i] = cd(cos(tau * i / n), sin(-tau * i / n));
 	}
 	for (uint32_t i = 0; i < lgn; i++) {
-		for (uint32_t j = 0; j < n; j += 2u << i) {
-			for (uint32_t k = 0; k < uint32_t(1) << i; k++) {
-				cd& top = p[j + k], & bottom = p[(1u << i) + j + k];
+		for (uint32_t j = 0; j < n; j += 2 << i) {
+			for (uint32_t k = 0; k < 1 << i; k++) {
+				cd &top = p[j + k], &bottom = p[(1u << i) + j + k];
 				bottom = top - bottom * powers[(n >> i + 1) * k];
 				top = top + top - bottom;
 			}
