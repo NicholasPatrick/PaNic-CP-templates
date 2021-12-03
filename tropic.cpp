@@ -1,4 +1,3 @@
-//tropic.cpp
 template <typename T>
 struct tropicmin {
 	T a;
