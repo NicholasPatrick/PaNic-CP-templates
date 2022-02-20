@@ -68,27 +68,18 @@ void readi(T& a) {
 void solve() {
 }
 int main() {
-	static const bool PRINT_TIME = 0;
-	u64 start_time, end_time, global_start_time, global_end_time;
 	u32 t = 1;
-	readu(t);
-	if constexpr (PRINT_TIME)
-		global_start_time = steady_clock::now().time_since_epoch().count();
+	// readu(t);
+	static const bool PRINT_T = 0;
+	auto gt = [&]() {return steady_clock::now().time_since_epoch().count();};
+	f64 p = (f64) steady_clock::period::num / steady_clock::period::den;
+	u64 st, et, gst, get;
+	if (PRINT_T) gst = gt();
 	while (t--) {
-		if constexpr (PRINT_TIME)
-			start_time = steady_clock::now().time_since_epoch().count();
+		if (PRINT_T) st = gt();
 		solve();
-		if constexpr (PRINT_TIME) {
-			end_time = steady_clock::now().time_since_epoch().count();
-			printf("time: %.3lfs\n", (double) (end_time - start_time) *
-				steady_clock::period::num / steady_clock::period::den);
-		}
+		if (PRINT_T) et = gt(), printf("time: %.3lfs\n", (et - st) * p);
 	}
-	if constexpr (PRINT_TIME) {
-		global_end_time = steady_clock::now().time_since_epoch().count();
-		printf("total time: %.3lfs\n", (double) (global_end_time -
-			global_start_time) * steady_clock::period::num /
-			steady_clock::period::den);
-	}
+	if (PRINT_T) get = gt(), printf("total time: %.3lfs\n", (get - gst) * p);
 }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ TEMPLATE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
