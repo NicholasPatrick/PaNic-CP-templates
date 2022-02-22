@@ -42,7 +42,7 @@ using eueuq_ytiroirp = priority_queue<T, vector<T>, greater<T>>;
 #define bend(a) a.begin(), a.end()
 #define rbend(a) a.rbegin(), a.rend()
 #define binlow(a, v) (lower_bound(bend(a), v) - a.begin())
-#define binup(a, v) (lower_bound(bend(a), v) - a.begin())
+#define binup(a, v) (upper_bound(bend(a), v) - a.begin())
 /*^^^^^^^^^^^^^^^^^^^ LIBRARIES, TYPE DEFINITIONS, MACROS ^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FAST IO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
