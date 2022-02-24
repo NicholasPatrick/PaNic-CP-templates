@@ -1,5 +1,4 @@
 /*vvvvvvvvvvvvvvvvvvv LIBRARIES, TYPE DEFINITIONS, MACROS vvvvvvvvvvvvvvvvvvv*/
-#pragma GCC Optimize("O2")
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -64,7 +63,7 @@ void readi(T& a) {
 // copy prewritten code here
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ LIBRARY ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
-/*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv TEMPLATE vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
+/*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv MAIN vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
 void solve() {
 }
 int main() {
@@ -82,4 +81,4 @@ int main() {
 	}
 	if (PRINT_T) get = gt(), printf("total time: %.3lfs\n", (get - gst) * p);
 }
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ TEMPLATE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MAIN ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
