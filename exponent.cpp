@@ -11,3 +11,8 @@ u32 modexp(u32 b, auto e, u32 m) {
 	for (; e; e >>= 1, b = (u64) b * b % m) if (e & 1) r = (u64) r * b % m;
 	return r;
 }
+u32 modexp(u32 b, auto e) {
+	u32 r = 1;
+	for (; e; e >>= 1, b = (u64) b * b % MOD) if (e & 1) r = (u64) r * b % MOD;
+	return r;
+}
