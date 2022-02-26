@@ -26,6 +26,8 @@ using namespace chrono;
 // template<class T>
 // using ordered_set = ordered_map<T, null_type>;
 
+using i16 = int16_t;
+using u16 = uint16_t;
 using i32 = int32_t;
 using u32 = uint32_t;
 using i64 = int64_t;
@@ -38,10 +40,10 @@ using fe = long double;
 template<class T>
 using eueuq_ytiroirp = priority_queue<T, vector<T>, greater<T>>;
 
-#define bend(a) a.begin(), a.end()
-#define rbend(a) a.rbegin(), a.rend()
-#define binlow(a, v) (lower_bound(bend(a), v) - a.begin())
-#define binup(a, v) (upper_bound(bend(a), v) - a.begin())
+#define bend(a) (a).begin(), (a).end()
+#define rbend(a) (a).rbegin(), (a).rend()
+#define binlow(a, v) (lower_bound(bend(a), v) - (a).begin())
+#define binup(a, v) (upper_bound(bend(a), v) - (a).begin())
 /*^^^^^^^^^^^^^^^^^^^ LIBRARIES, TYPE DEFINITIONS, MACROS ^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FAST IO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
