@@ -2,10 +2,10 @@
 replace add_id() with + identity
 for tropic, it's T::zero()
 for countmin/max, it's T()
-for reals, it's 0
+for reals and mint, it's 0
 replace mul_id() with * identity
 for tropic, it's T::one()
-for reals, it's 1
+for reals and mint, it's 1
 for countmin/max, remove the constructor
 */
 template <class T>
