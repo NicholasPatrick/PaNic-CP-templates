@@ -16,6 +16,7 @@ struct __h_pow {__h_pow() {
 using hash_t = array<u32, H_U>;
 class string_hash {
 	vector<hash_t> p;
+public:
 	string_hash(const string& s) {
 		u32 n = s.size(); p.resize(n + 1); p[0].fill(0);
 		for (u32 i = H_U; i--;) for (u32 j = 0; j < n; ++j)
