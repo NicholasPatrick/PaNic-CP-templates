@@ -5,7 +5,7 @@ auto dinitz(const al_t& al, u32 s, u32 t) {
 	vector<vector<w_t>> cap(v, vector<w_t>(v, 0)), flow = cap;
 	for (u32 x = v; x--;) for (const auto& [y, w] : al[x]) {
 		if (w == 0) continue;
-		if (!(cap[x][y] + cap[x][y])) yl[x].push_back(y), yl[y].push_back(x);
+		if (!(cap[x][y] + cap[y][x])) yl[x].push_back(y), yl[y].push_back(x);
 		cap[x][y] += w;
 	}
 	vector<u32> q(v, s), dl(v), dist;
@@ -19,7 +19,7 @@ auto dinitz(const al_t& al, u32 s, u32 t) {
 		}
 		if (dist[t] == -1) break;
 		for (u32 x = v; x--;) dl[x] = yl[x].size();
-		auto dfs = [&](auto self, u32 x, u32 f) -> w_t {
+		auto dfs = [&](auto self, u32 x, w_t f) -> w_t {
 			if (x == t) return f;
 			while (dl[x]) {
 				u32 y = yl[x][dl[x] - 1];
