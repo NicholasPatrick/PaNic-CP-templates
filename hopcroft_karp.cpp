@@ -1,6 +1,6 @@
 auto hopcroft_karp(u32 l, u32 r, const vector<pair<u32, u32>>& e) {
 	g_dir<true> g(l); vector<u32> rl(r, -1), lq, rq, ld, rd;
-	vector<bool> lr(l, 0), vis; bool f; lq.reserve(l); rq.reserve(r);
+	vector<bool> lr(l, 0), vi; bool f; lq.reserve(l); rq.reserve(r);
 	for (auto [u, v] : e)
 		if (!~(rl[v] + lr[u])) lr[rl[v] = u] = 1; else g.add_edge(u, v);
 	for (;;) {
@@ -19,15 +19,15 @@ auto hopcroft_karp(u32 l, u32 r, const vector<pair<u32, u32>>& e) {
 		}
 		if (!f) break;
 		auto dfs = [&](auto f, u32 u) -> bool {
-			vis[u] = 1;
+			vi[u] = 1;
 			for (auto it = g[u].begin(); it != g[u].end(); ++it) {
 				u32 v = *it; if (ld[u] != rd[v]) continue;
 				if (!~rl[v]) {a: rl[v] = u; g.erase(it); return 1;}
-				if (!vis[rl[v]] && f(f, rl[v])) {g.add_edge(rl[v], v); goto a;}
+				if (!vi[rl[v]] && f(f, rl[v])) {g.add_edge(rl[v], v); goto a;}
 			}
 			return 0;
 		};
-		vis.assign(l, 0); for (u32 u = l; u--;) if (!lr[u]) lr[u] = dfs(dfs, u);
+		vi.assign(l, 0); for (u32 u = l; u--;) if (!lr[u]) lr[u] = dfs(dfs, u);
 	}
 	vector<pair<u32, u32>> ret;
 	for (u32 v = r; v--;) if (~rl[v]) ret.emplace_back(rl[v], v);
