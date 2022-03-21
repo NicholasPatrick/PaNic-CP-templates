@@ -62,6 +62,13 @@ void readi(T& a) {
 }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ FAST IO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
+/*vvvvvvvvvvvvvvvvvvvvvvvvvvvv COMMON FUNCTIONS vvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
+template<class T1, class T2>
+T1& cmin(T1& a, const T2& b) {return a < b ? a : a = b;}
+template<class T1, class T2>
+T1& cmax(T1& a, const T2& b) {return a < b ? a = b : a;}
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ COMMON FUNCTIONS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv LIBRARY vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
 // copy prewritten code here
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ LIBRARY ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
