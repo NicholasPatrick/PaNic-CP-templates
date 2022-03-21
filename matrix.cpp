@@ -68,4 +68,7 @@ public:
 	matrix dot(const matrix& rhs) const {return ((matrix)*this).doteq(rhs);}
 	matrix operator*(const matrix& rhs) const {return mult(*this, rhs);}
 	matrix transpose() {return transp(*this);}
+	bool operator==(const matrix& rhs) const {
+		p_t const& self = *this; return n == rhs.n && self == rhs;
+	}
 };
