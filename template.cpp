@@ -67,6 +67,9 @@ template<class T1, class T2>
 T1& cmin(T1& a, const T2& b) {return a < b ? a : a = b;}
 template<class T1, class T2>
 T1& cmax(T1& a, const T2& b) {return a < b ? a = b : a;}
+u64 gt() {return steady_clock::now().time_since_epoch().count();};
+const f64 gtp = (f64) steady_clock::period::num / steady_clock::period::den;
+void sleep(long double t) {t = t / gtp + gt(); while (gt() < t);}
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ COMMON FUNCTIONS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv LIBRARY vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
@@ -80,15 +83,13 @@ int main() {
 	u32 t = 1;
 	// readu(t);
 	static const bool PRINT_T = 0;
-	auto gt = [&]() {return steady_clock::now().time_since_epoch().count();};
-	f64 p = (f64) steady_clock::period::num / steady_clock::period::den;
 	u64 st, et, gst, get;
 	if (PRINT_T) gst = gt();
 	while (t--) {
 		if (PRINT_T) st = gt();
 		solve();
-		if (PRINT_T) et = gt(), printf("time: %.3lfs\n", (et - st) * p);
+		if (PRINT_T) et = gt(), printf("time: %.6lfs\n", (et - st) * gtp);
 	}
-	if (PRINT_T) get = gt(), printf("total time: %.3lfs\n", (get - gst) * p);
+	if (PRINT_T) get = gt(), printf("total time: %.6lfs\n", (get - gst) * gtp);
 }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MAIN ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
