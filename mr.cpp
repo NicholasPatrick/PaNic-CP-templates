@@ -36,3 +36,7 @@ bool dmr64(u64 n) {
 	return mr64(n, 2) && mr64(n, 325) && mr64(n, 9375) && mr64(n, 28178) &&
 		mr64(n, 450775) && mr64(n, 9780504) && mr64(n, 1795265022);
 }
+bool is_prime(u64 n) {
+	for (u8 i : {2, 3, 5, 7}) {if (n % i == 0) return n == i;}
+	return n < 121 ? n > 2 : dmr64(n);
+}
