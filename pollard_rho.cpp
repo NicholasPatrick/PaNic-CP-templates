@@ -1,5 +1,5 @@
 vector<u64> factorise(u64 n) {
-	// factorises integers 1 ≤ n ≤ 2^63
+	// factorises integers 1 ≤ n ≤ 2^62
 	vector<u64> pf;
 	for (u8 i : {2, 3, 5}) while (!(n % i)) pf.push_back(i), n /= i;
 	for (u16 i = 7; i * i <= n && i <= 211; i += 6) for (u16 j : {0, 4})
