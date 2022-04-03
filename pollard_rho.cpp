@@ -24,7 +24,7 @@ vector<u64> factorise(u64 n) {
 			return u64(x) * ni * u128(n) + x >> 64;
 		};
 		auto f = [n, ni, redc](u64 x) {return redc(u128(x) * x + 1);};
-		const u64 m = sqrt(r + 1000) / 20;
+		const u64 m = 1 << (51 - __builtin_clzll(n) >> 2);
 		for (u64 x0 = 0; g == n; ++x0) {
 			u64 x, y = x0, q = g = 1, ys;
 			for (u64 r = 1; g == 1; r <<= 1) {
