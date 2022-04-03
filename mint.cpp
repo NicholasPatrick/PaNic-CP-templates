@@ -19,8 +19,8 @@ public:
 	t operator-(const t& r) const {return t(*this) -= r;}
 	t operator*(const t& r) const {return t(*this) *= r;}
 	t operator/(const t& r) const {return t(*this) /= r;}
-	t operator++(int) {return v++;}
-	t operator--(int) {return v--;}
+	t operator++(int) {t u = v; operator++(); return u;}
+	t operator--(int) {t u = v; operator--(); return u;}
 	t operator==(const t& rhs) const {return v == rhs.v;}
 	t operator!=(const t& rhs) const {return v != rhs.v;}
 	t operator<(const t& rhs) const {return v < rhs.v;}
