@@ -53,12 +53,12 @@ using eueuq_ytiroirp = priority_queue<T, vector<T>, greater<T>>;
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv FAST IO vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
 template<class T>
-void readu(T& a) {
+void readu(T &a) {
 	char c; do c = getchar(); while (!isdigit(c)); a = c & 15;
 	for (;;) {c = getchar(); if (!isdigit(c)) break; a = a * 10 + (c & 15);}
 }
 template<class T>
-void readi(T& a) {
+void readi(T &a) {
 	char c; bool n = false; do c = getchar(); while (!isdigit(c) && c != '-');
 	if (c == '-') n = true, c = getchar(); a = c & 15;
 	for (;;) {c = getchar(); if (!isdigit(c)) break; a = a * 10 + (c & 15);}
@@ -82,14 +82,14 @@ template<> void printui(i64 x) {printf("%lld\n", x);}
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvv COMMON FUNCTIONS vvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
 template<class T1, class T2>
-T1& cmin(T1& a, const T2& b) {return a < b ? a : a = b;}
+T1& cmin(T1 &a, const T2 &b) {return a < b ? a : a = b;}
 template<class T1, class T2>
-T1& cmax(T1& a, const T2& b) {return a < b ? a = b : a;}
+T1& cmax(T1 &a, const T2 &b) {return a < b ? a = b : a;}
 u64 gt() {return steady_clock::now().time_since_epoch().count();};
 const f64 gtp = (f64) steady_clock::period::num / steady_clock::period::den;
 void sleep(long double t) {t = t / gtp + gt(); while (gt() < t);}
 template<class T>
-T& sue(T &x) {sort(bend(x)); x.erase(unique(bend(x)), x.end()); return x;}
+T &sue(T &x) {sort(bend(x)); x.erase(unique(bend(x)), x.end()); return x;}
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ COMMON FUNCTIONS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv LIBRARY vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
