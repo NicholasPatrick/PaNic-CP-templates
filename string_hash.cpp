@@ -1,5 +1,5 @@
 const u32 BASE = 456;
-const u32 H_U = 1, MAX_LEN = 2e6;
+const u32 H_U = 2, MAX_LEN = 2e6;
 const u32 H_PRI[] = {0x3fffffdd, 1031999999, 1000000007};
 const lm32 H_LM[] = {0x3fffffdd, 1031999999, 1000000007};
 u32 h_pow[H_U][MAX_LEN + 1];
