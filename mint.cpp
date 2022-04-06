@@ -20,12 +20,12 @@ public:
 	t operator/(const t& r) const {return t(*this) /= r;}
 	t operator++(int) {t u = v; operator++(); return u;}
 	t operator--(int) {t u = v; operator--(); return u;}
-	t operator==(const t& r) const {return v == r.v;}
-	t operator!=(const t& r) const {return v != r.v;}
-	t operator<(const t& r) const {return v < r.v;}
-	t operator>(const t& r) const {return v > r.v;}
-	t operator<=(const t& r) const {return v <= r.v;}
-	t operator>=(const t& r) const {return v >= r.v;}
+	bool operator==(const t& r) const {return v == r.v;}
+	bool operator!=(const t& r) const {return v != r.v;}
+	bool operator<(const t& r) const {return v < r.v;}
+	bool operator>(const t& r) const {return v > r.v;}
+	bool operator<=(const t& r) const {return v <= r.v;}
+	bool operator>=(const t& r) const {return v >= r.v;}
 };
 template<class T>
 constexpr T inv(T x, T y) {
