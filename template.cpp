@@ -1,5 +1,4 @@
 /*vvvvvvvvvvvvvvvvvvv LIBRARIES, TYPE DEFINITIONS, MACROS vvvvvvvvvvvvvvvvvvv*/
-#include <numeric>
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -9,6 +8,7 @@
 #include <cstdio>
 #include <functional>
 #include <map>
+#include <numeric>
 #include <queue>
 #include <random>
 #include <set>
