@@ -1,4 +1,3 @@
-// the only thing integer about this is epsilon = 0
 template<class T = i32>
 struct p2 {
 	using t = p2<T>;
