@@ -1,9 +1,11 @@
 /*vvvvvvvvvvvvvvvvvvv LIBRARIES, TYPE DEFINITIONS, MACROS vvvvvvvvvvvvvvvvvvv*/
 #include <algorithm>
 #include <array>
+#include <bitset>
 #include <cassert>
 #include <cctype>
 #include <chrono>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <functional>
@@ -82,18 +84,18 @@ template<> void printui(i64 x) {printf("%lld\n", x);}
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvv COMMON FUNCTIONS vvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
 template<class T1, class T2>
-T1& cmin(T1 &a, const T2 &b) {return a < b ? a : a = b;}
+T1 &cmin(T1 &a, const T2 &b) {return a < b ? a : a = b;}
 template<class T1, class T2>
-T1& cmax(T1 &a, const T2 &b) {return a < b ? a = b : a;}
+T1 &cmax(T1 &a, const T2 &b) {return a < b ? a = b : a;}
 u64 gt() {return steady_clock::now().time_since_epoch().count();};
 const f64 gtp = (f64) steady_clock::period::num / steady_clock::period::den;
 void sleep(long double t) {t = t / gtp + gt(); while (gt() < t);}
 template<class T>
-T &sue(T &x) {sort(bend(x)); x.erase(unique(bend(x)), x.end()); return x;}
+T& sue(T &x) {sort(bend(x)); x.erase(unique(bend(x)), x.end()); return x;}
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count()); 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ COMMON FUNCTIONS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv LIBRARY vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
-// copy prewritten code here
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ LIBRARY ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 /*vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv MAIN vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv*/
@@ -103,13 +105,31 @@ int main() {
 	u32 t = 1;
 	// readu(t);
 	static const bool PRINT_T = 0;
-	u64 st, et, gst, get;
-	if (PRINT_T) gst = gt();
+	u64 st, et;
+	vector<f64> times;
+	times.reserve(t);
 	while (t--) {
 		if (PRINT_T) st = gt();
 		solve();
-		if (PRINT_T) et = gt(), printf("time: %.6lfs\n", (et - st) * gtp);
+		if (PRINT_T) {
+			et = gt();
+			printf("time: %.6lfs\n", (et - st) * gtp);
+			times.push_back((et - st) * gtp);
+		}
 	}
-	if (PRINT_T) get = gt(), printf("total time: %.6lfs\n", (get - gst) * gtp);
+	if (PRINT_T) {
+		if (times.size() != 1) {
+			f64 total = [&]() {
+				f64 s = 0; for (f64 i : times) s += i; return s;
+			}();
+			f64 mean = total / times.size();
+			f64 sd = sqrt([&]() {
+				f64 s = 0; for (f64 i : times) s += pow(i - mean, 2); return s;
+			}() / (times.size() - 1));
+			printf("total: %.6lfs\n", total);
+			printf("mean: %.6lfs\n", mean);
+			printf("sd: %.6lfs\n", sd);
+		}
+	}
 }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ MAIN ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
